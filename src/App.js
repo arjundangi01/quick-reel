@@ -121,6 +121,8 @@ function App() {
         <canvas id="canvas" />
       </section>
       <section className="flex flex-col gap-10 mt-5 relative">
+        
+        {/* button and input tag   */}
         <VideoButtons
           props={{
             videoResource,
@@ -144,6 +146,7 @@ function App() {
       </section>
 
       <div className={`top-16 md:top-16 left-0  z-0 absolute  `}>
+        {/* canvas for face detection */}
         <canvas ref={canvasRef} />
       </div>
     </main>
