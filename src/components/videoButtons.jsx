@@ -7,7 +7,8 @@ const VideoButtons = ({ props }) => {
     isPlaying,
     handlePlayPause,
     setVideoResource,
-
+    setShowFace,
+    showFace,
     onVideoUpload,
   } = props;
   return (
@@ -40,6 +41,14 @@ const VideoButtons = ({ props }) => {
           >
             Delete Video
           </button>
+          <button
+            className="w-[100%] bg-teal-400 text-white font-bold py-2 px-2 rounded-xl"
+            onClick={() => {
+              setShowFace(!showFace);
+            }}
+          >
+            {showFace ? "Remove Face" : "Show Face"}
+          </button>
         </div>
       ) : (
         <div>
@@ -49,7 +58,9 @@ const VideoButtons = ({ props }) => {
           >
             <span>
               Upload a Video file{" "}
-              <span className="text-red-300" >Try to upload a youtube video for better experience</span>{" "}
+              <span className="text-red-300">
+                Try to upload a youtube video for better experience
+              </span>{" "}
             </span>
           </label>
           <input

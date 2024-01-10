@@ -11,6 +11,7 @@ function App() {
   const [videoResource, setVideoResource] = useState(null);
   const [isPlaying, setPlaying] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [showFace, setShowFace] = useState(true);
   const reder = new FileReader();
   const videoRef = useRef();
   const canvasRef = useRef();
@@ -58,7 +59,6 @@ function App() {
     var video1 = new fabric.Image(video1E1, {
       height: 360,
       width: 630,
-      selectable: false,
     });
     setVideoResource(video1);
     storeCanvas.add(video1);
@@ -98,7 +98,7 @@ function App() {
         canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
         faceapi.draw.drawDetections(canvas, resizedDetections);
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-      }, 100);
+      }, 500);
     };
 
     loadModels();
@@ -121,7 +121,6 @@ function App() {
         <canvas id="canvas" />
       </section>
       <section className="flex flex-col gap-10 mt-5 relative">
-        
         {/* button and input tag   */}
         <VideoButtons
           props={{
@@ -130,22 +129,31 @@ function App() {
             handlePlayPause,
             setVideoResource,
             onVideoUpload,
+            setShowFace,
+            showFace
           }}
         />
 
         {/* this is video to get element by ID and it is hidden  */}
-        <video
-          id="video1"
-          ref={videoRef}
-          className="hidden w-[100%] min-w-[800px] overflow-visible "
-          width="630"
-          height="360"
-        >
-          <source id="video_src2" type="video/mp4" />
-        </video>
+        <div className="w-[100%] overflow-hidden">
+          <video
+            id="video1"
+            ref={videoRef}
+            className="hidden w-[100%]  overflow-visible "
+            width={630}
+            height={360}
+            crossOrigin="anonymous"
+          >
+            <source id="video_src2" type="video/mp4" />
+          </video>
+        </div>
       </section>
 
-      <div className={`top-16 md:top-16 left-0  z-0 absolute  `}>
+      <div
+        className={`top-16 md:top-16 left-0  z-0 absolute ${
+          showFace ? "block" : "hidden"
+        } `}
+      >
         {/* canvas for face detection */}
         <canvas ref={canvasRef} />
       </div>
