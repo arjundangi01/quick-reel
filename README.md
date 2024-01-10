@@ -1,5 +1,5 @@
 
-# How to Start
+# How to Start locally
 
 1. run command - ' npm i ' to install dependencies
 2. run command -  npm start  to start project locally
